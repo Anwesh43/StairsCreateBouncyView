@@ -31,8 +31,8 @@ fun Canvas.drawStepLine(i : Int, scale : Float, size : Float, paint : Paint) {
     val jk : Int = i / 2
     val sf : Float = scale.sinify().divideScale(i, lines)
     save()
-    translate(jk * wsize + ik * size, jk * wsize)
-    drawLine(0f, 0f, wsize * (1 - jk) * sf, wsize * ik * sf, paint)
+    translate(jk * wsize + ik * wsize, jk * wsize)
+    drawLine(0f, 0f, wsize * (1 - ik) * sf, wsize * ik * sf, paint)
     restore()
 }
 
@@ -45,12 +45,13 @@ fun Canvas.drawStepLines(scale : Float, size : Float, paint : Paint) {
 fun Canvas.drawSCBNode(i : Int, scale : Float, paint : Paint) {
     val w : Float = width.toFloat()
     val h : Float = height.toFloat()
-    val gap : Float = w / (nodes)
+    val gap : Float = w / (nodes + 1)
+    val position : Float = gap * (i + 1)
     paint.color = foreColor
     paint.strokeCap = Paint.Cap.ROUND
     paint.strokeWidth = Math.min(w, h) / strokeFactor
     save()
-    translate(gap * i, i * gap)
+    translate(position, position)
     drawStepLines(scale, gap, paint)
     restore()
 }
